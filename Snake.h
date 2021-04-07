@@ -26,7 +26,6 @@ private:
 	void changeDirection(char key);
 	void moveCell(Cell* cell);
 
-	std::vector<Cell> m_wholeSnake;
 	double m_speed;
 	int m_size;
 
@@ -36,7 +35,7 @@ public:
 
 	void moveSnake();
 	void addCell();
-
+	std::vector<Cell> wholeSnake;
 
 };
 

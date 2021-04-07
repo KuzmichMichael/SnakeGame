@@ -10,7 +10,7 @@ Snake::Snake()
 	head.y = GameBoard::boardSizeY / 2;
 	head.curDirection = Direction::RIGHT;
 	head.prevDirection = Direction::RIGHT;
-	m_wholeSnake.push_back(head);
+	wholeSnake.push_back(head);
 
 
 	m_speed = 0;
@@ -19,42 +19,42 @@ Snake::Snake()
 
 void Snake::addCell()
 {
-	if (m_wholeSnake.empty()) {
+	if (wholeSnake.empty()) {
 		return;
 	}
 	Cell cell;
-	cell.curDirection = m_wholeSnake.back().prevDirection;
-	cell.prevDirection = Direction::NONE;
+	cell.curDirection = wholeSnake.back().prevDirection;
+	cell.prevDirection = Direction::LEFT;
 	
 	switch (cell.curDirection)
 	{
 	case(Direction::UP):
-		cell.x = m_wholeSnake.back().x;
-		cell.y = m_wholeSnake.back().y + 1;
+		cell.x = wholeSnake.back().x;
+		cell.y = wholeSnake.back().y + 1;
 		break;
 
 	case(Direction::DOWN):
-		cell.x = m_wholeSnake.back().x;
-		cell.y = m_wholeSnake.back().y - 1;
+		cell.x = wholeSnake.back().x;
+		cell.y = wholeSnake.back().y - 1;
 		break;
 
 	case(Direction::RIGHT):
-		cell.x = m_wholeSnake.back().x - 1;
-		cell.y = m_wholeSnake.back().y;
+		cell.x = wholeSnake.back().x - 1;
+		cell.y = wholeSnake.back().y;
 		break;
 
 	case(Direction::LEFT):
-		cell.x = m_wholeSnake.back().x + 1;
-		cell.y = m_wholeSnake.back().y;
+		cell.x = wholeSnake.back().x + 1;
+		cell.y = wholeSnake.back().y;
 		break;
 
 	default:
 		break;
 	}
 
-	m_wholeSnake.push_back(cell);
+	wholeSnake.push_back(cell);
 	//change every cell direction
-	for (auto it = m_wholeSnake.begin(); it != m_wholeSnake.end(); it++) {
+	for (auto it = wholeSnake.begin(); it != wholeSnake.end(); it++) {
 		std::cout <<(*it).x << " " << (*it).y << " : ";
 	}
 
@@ -64,7 +64,7 @@ void Snake::addCell()
 
 void Snake::moveSnake()
 {
-	if (m_wholeSnake.empty()) {
+	if (wholeSnake.empty()) {
 		return;
 	}
 
@@ -73,7 +73,7 @@ void Snake::moveSnake()
 	}
 	
 	//change every cell direction
-	for (auto it = m_wholeSnake.rbegin(); it != m_wholeSnake.rend() - 1; it++) {
+	for (auto it = wholeSnake.rbegin(); it != wholeSnake.rend() - 1; it++) {
 
 		(*(it + 1)).prevDirection = (*(it + 1)).curDirection;
 		(*it).curDirection = (*(it + 1)).curDirection;
@@ -81,7 +81,7 @@ void Snake::moveSnake()
 	}
 
 	//move every cell
-	for (auto it = m_wholeSnake.begin(); it != m_wholeSnake.end(); it++) {
+	for (auto it = wholeSnake.begin(); it != wholeSnake.end(); it++) {
 		moveCell(&(*it));
 	}
 }
@@ -114,42 +114,42 @@ void Snake::moveCell(Cell* cell)
 
 void Snake::changeDirection(char key)
 {
-	if (m_wholeSnake.empty()) {
+	if (wholeSnake.empty()) {
 		return;
 	}
 
 	switch (key)
 	{
 	case 'w':
-		if (m_wholeSnake.front().curDirection == Direction::DOWN) {
+		if (wholeSnake.front().curDirection == Direction::DOWN) {
 			break;
 		}
-		m_wholeSnake.front().prevDirection = m_wholeSnake.front().curDirection;
-		m_wholeSnake.front().curDirection = Direction::UP;
+		wholeSnake.front().prevDirection = wholeSnake.front().curDirection;
+		wholeSnake.front().curDirection = Direction::UP;
 		break;
 
 	case 's':
-		if (m_wholeSnake.front().curDirection == Direction::UP) {
+		if (wholeSnake.front().curDirection == Direction::UP) {
 			break;
 		}
-		m_wholeSnake.front().prevDirection = m_wholeSnake.front().curDirection;
-		m_wholeSnake.front().curDirection = Direction::DOWN;
+		wholeSnake.front().prevDirection = wholeSnake.front().curDirection;
+		wholeSnake.front().curDirection = Direction::DOWN;
 		break;			
 						
 	case 'a':		
-		if (m_wholeSnake.front().curDirection == Direction::RIGHT) {
+		if (wholeSnake.front().curDirection == Direction::RIGHT) {
 			break;
 		}
-		m_wholeSnake.front().prevDirection = m_wholeSnake.front().curDirection;
-		m_wholeSnake.front().curDirection = Direction::LEFT;
+		wholeSnake.front().prevDirection = wholeSnake.front().curDirection;
+		wholeSnake.front().curDirection = Direction::LEFT;
 		break;			
 						
 	case 'd':	
-		if (m_wholeSnake.front().curDirection == Direction::LEFT) {
+		if (wholeSnake.front().curDirection == Direction::LEFT) {
 			break;
 		}
-		m_wholeSnake.front().prevDirection = m_wholeSnake.front().curDirection;
-		m_wholeSnake.front().curDirection = Direction::RIGHT;
+		wholeSnake.front().prevDirection = wholeSnake.front().curDirection;
+		wholeSnake.front().curDirection = Direction::RIGHT;
 		break;
 
 	default:

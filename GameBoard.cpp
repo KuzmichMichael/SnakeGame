@@ -23,14 +23,14 @@ GameBoard::GameBoard()
 
 void GameBoard::drawSnake(Snake* snake)
 {
-	for (auto it : snake->m_wholeSnake) {
+	for (auto it : snake->wholeSnake) {
 		m_board[it.y][it.x] = 'O';
 	}
 }
 
 void GameBoard::cleanBoardFromSnake(Snake* snake)
 {
-	for (auto it : snake->m_wholeSnake) {
+	for (auto it : snake->wholeSnake) {
 		GameBoard::clearSymbol(it.x, it.y);
 	}
 }

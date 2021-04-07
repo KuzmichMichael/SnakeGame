@@ -10,15 +10,18 @@ int main() {
 	GameBoard board;
 	Snake snake;
 
-	std::chrono::milliseconds delayMS(1000);
+	std::chrono::milliseconds delayMS(100);
 	int i = 0;
 	while (true)
 	{
-		snake.addCell();
-		//snake->moveSnake(snake);
-		//board.drawSnake(snake);
-		//board.updateBoard();
-		//board.cleanBoardFromSnake(snake);
+		if (i == 5) {
+			snake.addCell();
+			i = 0;
+		}
+		snake.moveSnake();
+		board.drawSnake(&snake);
+		board.updateBoard();
+		board.cleanBoardFromSnake(&snake);
 		std::this_thread::sleep_for(delayMS);
 		i++;
 	}
