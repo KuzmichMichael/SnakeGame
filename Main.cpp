@@ -10,7 +10,7 @@ int main() {
 	GameBoard board;
 	Snake snake;
 
-	std::chrono::milliseconds delayMS(100);
+	std::chrono::milliseconds delayMS(50);
 	int i = 0;
 	while (true)
 	{

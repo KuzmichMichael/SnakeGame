@@ -24,7 +24,7 @@ void Snake::addCell()
 	}
 	Cell cell;
 	cell.curDirection = wholeSnake.back().prevDirection;
-	cell.prevDirection = Direction::LEFT;
+	cell.prevDirection = Direction::RIGHT;
 	
 	switch (cell.curDirection)
 	{
@@ -71,6 +71,11 @@ void Snake::moveSnake()
 	if (_kbhit()) {
 		changeDirection(_getch());
 	}
+
+	//move every cell
+	for (auto it = wholeSnake.begin(); it != wholeSnake.end(); it++) {
+		moveCell(&(*it));
+	}
 	
 	//change every cell direction
 	for (auto it = wholeSnake.rbegin(); it != wholeSnake.rend() - 1; it++) {
@@ -78,11 +83,6 @@ void Snake::moveSnake()
 		(*(it + 1)).prevDirection = (*(it + 1)).curDirection;
 		(*it).curDirection = (*(it + 1)).curDirection;
 
-	}
-
-	//move every cell
-	for (auto it = wholeSnake.begin(); it != wholeSnake.end(); it++) {
-		moveCell(&(*it));
 	}
 }
 
