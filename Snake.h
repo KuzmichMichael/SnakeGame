@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <conio.h>
+#include <iostream>
 
 class Snake
 {
@@ -21,19 +23,21 @@ private:
 		Direction prevDirection;
 	};
 
-	void changeDirection(Snake* snake, char key);
+	void changeDirection(char key);
 	void moveCell(Cell* cell);
+
+	std::vector<Cell> m_wholeSnake;
+	double m_speed;
+	int m_size;
 
 public:
 	Snake();
 	~Snake() = default;
 
-	void moveSnake(Snake* snake);
-	void addCell(Snake* snake);
+	void moveSnake();
+	void addCell();
 
-	std::vector<Cell> wholeSnake;
-	double speed;
-	int size;
+
 };
 
 
