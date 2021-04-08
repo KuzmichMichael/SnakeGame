@@ -6,15 +6,18 @@
 Snake::Snake()
 {
 	Cell head;
-	head.x = GameBoard::boardSizeX / 2;
-	head.y = GameBoard::boardSizeY / 2;
+	head.x = GameBoard::m_boardSizeX / 2;
+	head.y = GameBoard::m_boardSizeY / 2;
 	head.curDirection = Direction::RIGHT;
 	head.prevDirection = Direction::RIGHT;
 	wholeSnake.push_back(head);
 
 
 	m_speed = 0;
-	m_size = 2;
+	m_size = 1;
+
+	addCell();
+	addCell();
 }
 
 void Snake::addCell()
@@ -53,10 +56,6 @@ void Snake::addCell()
 	}
 
 	wholeSnake.push_back(cell);
-	//change every cell direction
-	for (auto it = wholeSnake.begin(); it != wholeSnake.end(); it++) {
-		std::cout <<(*it).x << " " << (*it).y << " : ";
-	}
 
 	std::cout << std::endl;
 	m_size++;
@@ -111,7 +110,6 @@ void Snake::moveCell(Cell* cell)
 	}
 }
 
-
 void Snake::changeDirection(char key)
 {
 	if (wholeSnake.empty()) {
@@ -156,5 +154,32 @@ void Snake::changeDirection(char key)
 		break;
 	}
 }
+
+bool Snake::isSnakeBiteWall() const
+{
+	if (GameBoard::m_board[wholeSnake.front().y][wholeSnake.front().x] == GameBoard::wallSymbol) {
+		return true;
+	}
+	return false;
+}
+
+bool Snake::isSnakeBiteTail() const
+{
+	for (auto it = wholeSnake.begin() + 1; it != wholeSnake.end(); it++){
+		if ((*it).x == wholeSnake.front().x && (*it).y == wholeSnake.front().y) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Snake::isSnakeBiteFruite() const
+{
+	if (GameBoard::m_board[wholeSnake.front().y][wholeSnake.front().x] == GameBoard::fruiteSymbol) {
+		return true;
+	}
+	return false;
+}
+
 
 

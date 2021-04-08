@@ -3,6 +3,8 @@
 #include <conio.h>
 #include <iostream>
 
+
+
 class Snake
 {
 private:
@@ -35,6 +37,10 @@ public:
 
 	void moveSnake();
 	void addCell();
+	bool isSnakeBiteWall() const;
+	bool isSnakeBiteTail() const;
+	bool isSnakeBiteFruite() const;
+
 	std::vector<Cell> wholeSnake;
 
 };
