@@ -1,4 +1,5 @@
 #include "Snake.h"
+#include "GameRules.h"
 #include "GameBoard.h"
 
 
@@ -12,8 +13,6 @@ Snake::Snake()
 	head.prevDirection = Direction::RIGHT;
 	wholeSnake.push_back(head);
 
-
-	m_speed = 0;
 	m_size = 1;
 
 	addCell();
@@ -157,7 +156,7 @@ void Snake::changeDirection(char key)
 
 bool Snake::isSnakeBiteWall() const
 {
-	if (GameBoard::m_board[wholeSnake.front().y][wholeSnake.front().x] == GameBoard::wallSymbol) {
+	if (GameBoard::m_board[wholeSnake.front().y][wholeSnake.front().x] == GameRules::wallSymbol) {
 		return true;
 	}
 	return false;
@@ -175,7 +174,7 @@ bool Snake::isSnakeBiteTail() const
 
 bool Snake::isSnakeBiteFruite() const
 {
-	if (GameBoard::m_board[wholeSnake.front().y][wholeSnake.front().x] == GameBoard::fruiteSymbol) {
+	if (GameBoard::m_board[wholeSnake.front().y][wholeSnake.front().x] == GameRules::fruiteSymbol) {
 		return true;
 	}
 	return false;

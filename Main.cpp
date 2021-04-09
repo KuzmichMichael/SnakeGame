@@ -13,25 +13,27 @@ int main() {
 	Snake snake;
 	Fruite fruite;
 
+	board.attachSnake(&snake);
+	board.attachFruite(&fruite);
 	std::chrono::milliseconds delayMS(20);
 	while (true)
 	{
-		board.drawFruite(fruite);
+		board.drawFruite();
 		snake.moveSnake();
 
 		if (snake.isSnakeBiteTail() || snake.isSnakeBiteWall()) {
 			board.showGameOver();
 			return 999;
 		}
-
+		
 		if (snake.isSnakeBiteFruite()) {
 			snake.addCell();
 			fruite.addFruit();
 		}
 
-		board.drawSnake(snake);
+		board.drawSnake();
 		board.updateBoard();
-		board.cleanBoardFromSnake(snake);
+		board.cleanBoardFromSnake();
 
 		std::this_thread::sleep_for(delayMS);
 	}

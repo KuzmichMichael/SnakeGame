@@ -6,22 +6,19 @@
 class GameBoard
 {
 public:
-	static constexpr const char snakeSymbol = 'O';
-	static constexpr const char wallSymbol = '#';
-	static constexpr const char voidSymbol = ' ';
-	static constexpr const char fruiteSymbol = '@';
-
 	GameBoard();
 	~GameBoard() = default;
 
 	static void clearSymbol(int x, int y);
 	void updateBoard();
 	void showGameOver();
+	void attachSnake(Snake *attachedSnake);
+	void attachFruite(Fruite* attachedFruite);
 
-	void drawSnake(Snake snake);
-	void cleanBoardFromSnake(Snake snake);
+	void drawSnake();
+	void cleanBoardFromSnake();
 
-	void drawFruite(Fruite fruite);
+	void drawFruite();
 
 	friend class Snake;
 	friend class Fruite;
@@ -35,5 +32,8 @@ private:
 
 	static char m_board[m_boardSizeY][m_boardSizeX];
 	static char m_gameOverString[m_gameOverStringSizeY][m_gameOverStringSizeX];
+
+	Snake* snake;
+	Fruite* fruite;
 };
 

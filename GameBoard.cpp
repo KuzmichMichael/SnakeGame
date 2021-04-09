@@ -1,19 +1,20 @@
 #include "GameBoard.h"
+#include "GameRules.h"
 
 GameBoard::GameBoard()
 {
 	for (size_t i = 0; i < m_boardSizeY; i++) {
 		for (size_t j = 0; j < m_boardSizeX; j++) {
 			if (i == 0 || i == (m_boardSizeY - 1)) {
-				m_board[i][j] = wallSymbol;
+				m_board[i][j] = GameRules::wallSymbol;
 				std::cout << m_board[i][j];
 			}
 			else if (j == 0 || j == (m_boardSizeX - 1)) {
-				m_board[i][j] = wallSymbol;
+				m_board[i][j] = GameRules::wallSymbol;
 				std::cout << m_board[i][j];
 			}
 			else {
-				m_board[i][j] = voidSymbol;
+				m_board[i][j] = GameRules::voidSymbol;
 				std::cout << m_board[i][j];
 			}
 		}
@@ -21,29 +22,37 @@ GameBoard::GameBoard()
 	}
 }
 
-void GameBoard::drawSnake(Snake snake)
+void GameBoard::drawSnake()
 {
-	for (auto it : snake.wholeSnake) {
-		m_board[it.y][it.x] = snakeSymbol;
+	if (snake->wholeSnake.empty()) {
+		exit;
+	}
+
+	for (auto it : snake->wholeSnake) {
+		m_board[it.y][it.x] = GameRules::snakeSymbol;
 	}
 }
 
-void GameBoard::cleanBoardFromSnake(Snake snake)
+void GameBoard::cleanBoardFromSnake()
 {
-	for (auto it : snake.wholeSnake) {
+	if (snake->wholeSnake.empty()) {
+		exit;
+	}
+
+	for (auto it : snake->wholeSnake) {
 		GameBoard::clearSymbol(it.x, it.y);
 	}
 }
 
-void GameBoard::drawFruite(Fruite fruite)
+void GameBoard::drawFruite()
 {
-	m_board[fruite.getY()][fruite.getX()] = fruiteSymbol;
+	m_board[fruite->getY()][fruite->getX()] = GameRules::fruiteSymbol;
 }
 
 void GameBoard::clearSymbol(int x, int y)
 {
-	if (m_board[y][x] != wallSymbol) {
-		m_board[y][x] = voidSymbol;
+	if (m_board[y][x] != GameRules::wallSymbol) {
+		m_board[y][x] = GameRules::voidSymbol;
 	}
 }
 
@@ -67,4 +76,14 @@ void GameBoard::showGameOver()
 		}
 		std::cout << std::endl;
 	}
+}
+
+void GameBoard::attachSnake(Snake *attachedSnake)
+{
+	snake = attachedSnake;
+}
+
+void GameBoard::attachFruite(Fruite* attachedFruite)
+{
+	fruite = attachedFruite;
 }

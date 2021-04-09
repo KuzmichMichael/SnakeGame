@@ -28,7 +28,6 @@ private:
 	void changeDirection(char key);
 	void moveCell(Cell* cell);
 
-	double m_speed;
 	int m_size;
 
 public:
